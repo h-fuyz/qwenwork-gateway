@@ -26,7 +26,9 @@ chmod 700 "$DATA_DIR/creds"
 echo "==> 3/6 部署代码到 $APP_DIR"
 mkdir -p "$APP_DIR"
 # 假定脚本从仓库根目录执行；也可改成 git clone
-rsync -a --delete --exclude '.git' --exclude 'test' --exclude 'deploy' \
+# 注意：deploy/ 与 test/ 必须一起带上——service 文件在 deploy/，
+# 部署门禁的冒烟测试在 test/，只排除 .git 与本机运行数据
+rsync -a --delete --exclude '.git' \
   "$(dirname "$0")/../"/ "$APP_DIR/"
 chown -R "root:$RUN_USER" "$APP_DIR"
 chmod -R o-rwx "$APP_DIR"
