@@ -2,6 +2,8 @@
 
 把企业版**千问办公（QwenWork）**的团队模型接入 **Claude Code** 和 **Codex** 的共享网关。
 
+[![](https://img.shields.io/badge/powered_by-dsh-4D6BFE?style=flat-square&logo=deepseek&logoColor=white)](https://github.com/deepseek-ai/deepseek-harness)
+
 ```
 Claude Code ──Anthropic /v1/messages──┐
                                       ├──▶ qwenwork-gateway ──per-user shim──▶ gateway.qwenwork.cn
