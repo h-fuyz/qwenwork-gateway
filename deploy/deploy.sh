@@ -31,7 +31,9 @@ mkdir -p "$APP_DIR"
 rsync -a --delete --exclude '.git' \
   "$(dirname "$0")/../"/ "$APP_DIR/"
 chown -R "root:$RUN_USER" "$APP_DIR"
+# other 无任何权限；组（qwg 运行用户）可读+遍历目录（X 仅给目录与已有执行位）
 chmod -R o-rwx "$APP_DIR"
+chmod -R g+rX "$APP_DIR"
 
 echo "==> 4/6 语法自检 + 冒烟测试"
 cd "$APP_DIR"
