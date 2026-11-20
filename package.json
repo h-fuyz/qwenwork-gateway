@@ -1,0 +1,32 @@
+{
+  "name": "qwenwork-gateway",
+  "version": "0.1.0",
+  "description": "QwenWork team gateway: expose enterprise QwenWork models to Claude Code (Anthropic Messages) and Codex (OpenAI Responses)",
+  "license": "MIT",
+  "type": "module",
+  "main": "src/index.js",
+  "bin": {
+    "qwenwork-gateway": "bin/qwenwork-gateway.mjs"
+  },
+  "engines": {
+    "node": "^22.19.0 || >=24.0.0"
+  },
+  "keywords": [
+    "qwenwork",
+    "claude-code",
+    "codex",
+    "gateway",
+    "llm-proxy"
+  ],
+  "files": [
+    "src/",
+    "bin/",
+    "README.md",
+    "LICENSE",
+    "THIRD-PARTY-NOTICES.md"
+  ],
+  "exports": {
+    ".": "./src/index.js",
+    "./package.json": "./package.json"
+  }
+}

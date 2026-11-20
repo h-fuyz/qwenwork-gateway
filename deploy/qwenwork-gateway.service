@@ -1,0 +1,37 @@
+[Unit]
+Description=QwenWork Team Gateway (Claude Code / Codex unified gateway)
+Documentation=https://github.com/your-org/qwenwork-gateway
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+# 专用低权限用户（部署时创建，见 deploy.sh）
+User=qwg
+Group=qwg
+WorkingDirectory=/opt/qwenwork-gateway
+ExecStart=/usr/bin/node /opt/qwenwork-gateway/bin/qwenwork-gateway.mjs serve
+# 数据目录（凭据/用户注册表）与运行环境
+Environment=QWENWORK_GATEWAY_HOME=/var/lib/qwenwork-gateway
+Environment=QWENWORK_GATEWAY_BIND_HOST=127.0.0.1
+Environment=QWENWORK_GATEWAY_BIND_PORT=8787
+# 对外服务由 Nginx TLS 反代承担，网关本体只听回环
+# 如需网关直接监听内网网卡，把 BIND_HOST 改成对应内网 IP 并开放防火墙
+Restart=always
+RestartSec=3
+# 崩溃保护
+StartLimitIntervalSec=60
+StartLimitBurst=5
+# 加固
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/qwenwork-gateway
+# 日志走 journald
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=qwenwork-gateway
+
+[Install]
+WantedBy=multi-user.target
